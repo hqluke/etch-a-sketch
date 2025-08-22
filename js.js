@@ -6,45 +6,55 @@ let gridSize = "16x16";
 document.addEventListener('DOMContentLoaded', function() {
     console.log("hi")
 
-    let title = document.createElement("h1");
+    const title = document.createElement("h1");
     title.textContent = `Etch-a-Sketch ${gridSize}`;
     body.appendChild(title);
 
-    let elementsDiv = document.createElement("div");
+    const elementsDiv = document.createElement("div");
     elementsDiv.classList.add("elements");
     containerDiv.appendChild(elementsDiv);
 
-    let colorDiv = document.createElement("div");
+    const colorDiv = document.createElement("div");
     colorDiv.classList.add("colorDiv");
     elementsDiv.appendChild(colorDiv);
 
-    let palette = document.createElement("input");
+    const palette = document.createElement("input");
     palette.type = "color";
     palette.classList.add("palette");
     palette.value = "#FF0000";
     colorDiv.appendChild(palette);
 
-    let paletteText = document.createElement("p");
+    const paletteText = document.createElement("p");
     paletteText.classList.add("paletteText")
     paletteText.textContent = "Select your color above.";
     colorDiv.appendChild(paletteText);
 
-    let sizeDiv = document.createElement("div");
+    const sizeDiv = document.createElement("div");
     sizeDiv.classList.add("sizeDiv");
     elementsDiv.appendChild(sizeDiv);
 
-    let rangeSlider = document.createElement("input");
+    const rangeSlider = document.createElement("input");
     rangeSlider.type = "range";
-    rangeSlider.classList.add("range");
-    rangeSlider.min = 2;
+    rangeSlider.classList.add("rangeSlider");
+    rangeSlider.min = 4;
     rangeSlider.max = 100;
+    rangeSlider.step = 4
+    sizeDiv.appendChild(rangeSlider);
 
-    let rangeLabel = document.createElement("label");
-    rangeLabel.htmlFor = ".range"; //gonna needa figure out the label
+    const rangeValue = document.createElement("p");
+    rangeValue.classList.add("rangeValue");
+    sizeDiv.appendChild(rangeValue);
+
+    const rangeButton = document.createElement("button");
+    rangeButton.classList.add("rangeButton");
+    rangeButton.textContent = "Create New Grid";
+    sizeDiv.appendChild(rangeButton);
+
     
 
 
-    let gridDiv = document.createElement("div");
+
+    const gridDiv = document.createElement("div");
     gridDiv.classList.add("grid");
     containerDiv.appendChild(gridDiv);
 
@@ -52,8 +62,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const box = document.createElement("div");
         box.classList.add("square");
         gridDiv.appendChild(box);
-        count++;
     }
 
-
+    slider();
 });
+
+function slider(){
+const rSlider = document.querySelector(".rangeSlider");
+const rValue = document.querySelector(".rangeValue");
+const rButton = document.querySelector(".rangeButton");
+let rangeNum;
+    rValue.textContent = `New Grid Size: ${gridSize}`;
+
+    rSlider.addEventListener("input", (event) => {
+     rangeNum = event.target.value;
+     rValue.textContent = `New Grid Size: ${rangeNum}x${rangeNum}`;
+    });
+
+    rButton.addEventListener("click", () =>{
+        gridSize = rValue.textContent;
+        console.log(gridSize);
+    }) 
+}
