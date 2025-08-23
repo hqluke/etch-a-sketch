@@ -1,3 +1,3 @@
 # etch-a-sketch
 
-It's an etch-a-sketch with a default grid of 16x16. When you move the mouse the squares get colored in. You can reset the current grid or create a new grid with a user inputted size, max size is 100x100. You can turn a square back to white by holding alt and hovering over the square with your mouse. Holding shift will prevent you from coloring so you can get to specific squares. Color pallet feature? 
+It's an etch-a-sketch with a default grid of 16x16. When you move the mouse over the squares, they get colored in with the color of your choice. You can reset the current grid or create a new grid with your desired size; max size is 100x100. You can turn a square back to white by holding alt and hovering over the square with your mouse. Holding shift will prevent you from coloring so you can get to specific squares.
