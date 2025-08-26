@@ -14,7 +14,7 @@ function createElements(){
 
     const title = document.createElement("h1");
     title.textContent = titleText(gridSize);
-    titleDiv.appendChild(title);
+    
 
     const elementsDiv = document.createElement("div");
     elementsDiv.classList.add("elements");
@@ -94,16 +94,24 @@ function createElements(){
     controlsDiv.appendChild(daControls);
     
     
+    const lateDiv = document.createElement("div");
+    lateDiv.classList.add("lateDiv");
+    containerDiv.appendChild(lateDiv);
 
+    lateDiv.appendChild(title);
 
     const gridDiv = document.createElement("div");
     gridDiv.classList.add("grid");
-    containerDiv.appendChild(gridDiv);
+    lateDiv.appendChild(gridDiv);
+
+
+
+    
 
     return {
         titleDiv, title, elementsDiv, colorDiv, palette, paletteText,
         sizeDiv, rangeSlider, rangeValue, rangeButton, resetDiv, resetButton,
-        rulesDiv, daRulez, gridDiv, textDiv, controlsDiv, controlsTitle, daControls
+        rulesDiv, daRulez, gridDiv, textDiv, controlsDiv, controlsTitle, daControls, lateDiv
     };
 
 

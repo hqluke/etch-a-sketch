@@ -2,9 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px;
+    width: 400px;
     height: auto;
-    margin-left: 666px;
+    margin-left: 616px;
 }
 
 
@@ -43,6 +43,7 @@
     justify-content: flex-start;
     align-items: center;
     background-color: rgb(231, 255, 231);
+    margin-top: 180px;
 }
 
 .colorDiv{
@@ -124,7 +125,11 @@ body{
     white-space: pre-line;
 }
 
-
+.lateDiv{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+}
 
 
 
