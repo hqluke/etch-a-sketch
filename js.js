@@ -1,6 +1,5 @@
 const body = document.body
 const containerDiv = document.querySelector(".container");
-let currentColor = document.querySelector(".palette") //acess it with  currentColor.value
 let gridSize = 16;
 let squareSize = 0;
 let elements = {};
@@ -8,9 +7,7 @@ let elements = {};
 
 function createElements(){
 
-    const titleDiv = document.createElement("div");
-    titleDiv.classList.add("titleDiv");
-    body.insertBefore(titleDiv, containerDiv);
+
 
     const title = document.createElement("h1");
     title.textContent = titleText(gridSize);
@@ -85,13 +82,26 @@ function createElements(){
 
     const controlsTitle = document.createElement("p");
     controlsTitle.classList.add("controlsTitle")
-    controlsTitle.textContent = "--CONTROLS--";
+    controlsTitle.textContent = "-----CONTROLS-----";
     controlsDiv.appendChild(controlsTitle);
 
-    const daControls = document.createElement("p");
+    const controlListDiv = document.createElement("div");
+    controlListDiv.classList.add("controlListDiv");
+    controlsDiv.appendChild(controlListDiv);
+
+    const daControls = document.createElement("ul");
     daControls.classList.add("daControls");
-    daControls.textContent = "Holding shift allows you to move the mouse without coloring in squares.\n\n Holding alt and going over a square will turn it back to white.";
     controlsDiv.appendChild(daControls);
+
+    const daControlsListTop = document.createElement("li");
+    daControlsListTop.classList.add("daControlsListTop");
+    daControlsListTop.textContent = "Hold alt and hover over squares to turn them to white. ";
+    daControls.appendChild(daControlsListTop);
+
+    const daControlsListBottom = document.createElement("li");
+    daControlsListBottom.classList.add("daControlsListBottom");
+    daControlsListBottom.textContent = "Hold shift to select specific squares; you can click on the square to color it. You can do the same with shift+alt+click to color a square white.";
+    daControls.appendChild(daControlsListBottom);
     
     
     const lateDiv = document.createElement("div");
@@ -109,9 +119,10 @@ function createElements(){
     
 
     return {
-        titleDiv, title, elementsDiv, colorDiv, palette, paletteText,
+         title, elementsDiv, colorDiv, palette, paletteText,
         sizeDiv, rangeSlider, rangeValue, rangeButton, resetDiv, resetButton,
-        rulesDiv, daRulez, gridDiv, textDiv, controlsDiv, controlsTitle, daControls, lateDiv
+        rulesDiv, daRulez, gridDiv, textDiv, controlsDiv, controlsTitle, daControls,
+         lateDiv, daControlsListTop, daControlsListBottom, controlListDiv
     };
 
 
@@ -122,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elements = createElements();
     newGrid(gridSize)
     slider();
+    mouseControls();
 });
 
 
@@ -188,4 +200,30 @@ function titleText(size){
 
 function resetGridText(size){
     return `Reset Current Grid\n${size}x${size}`;
+}
+
+function mouseControls(){
+    elements.gridDiv.addEventListener("mouseover", (event) =>{
+        if (!event.shiftKey) {
+            if (event.altKey) {
+                event.target.style.backgroundColor = "white";
+                event.target.style.borderColor = "black";
+            } else {
+                event.target.style.backgroundColor = elements.palette.value;
+                event.target.style.borderColor = elements.palette.value;
+            }
+        }
+    })
+
+
+    elements.gridDiv.addEventListener("click", (event) =>{
+            if (event.altKey) {
+                event.target.style.backgroundColor = "white";
+                event.target.style.borderColor = "black";
+            } else {
+                event.target.style.backgroundColor = elements.palette.value;
+                event.target.style.borderColor = elements.palette.value;
+            }
+    })    
+    
 }
