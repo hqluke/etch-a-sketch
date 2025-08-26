@@ -187,6 +187,7 @@ function resetGrid(){
     console.log(elements.gridDiv.children.length)
     for(const child of elements.gridDiv.children){
         child.style.backgroundColor = "white";
+        child.style.borderColor = "black";
     }
 }
 
