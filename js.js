@@ -1,20 +1,19 @@
 const body = document.body
 const containerDiv = document.querySelector(".container");
 let currentColor = document.querySelector(".palette") //acess it with  currentColor.value
-let gridSize = "16";
-let newGridSize = "";
+let gridSize = 16;
 let squareSize = 0;
+let elements = {};
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("hi")
+function createElements(){
 
     const titleDiv = document.createElement("div");
     titleDiv.classList.add("titleDiv");
     body.insertBefore(titleDiv, containerDiv);
 
     const title = document.createElement("h1");
-    title.textContent = `Etch-a-Sketch ${gridSize}x${gridSize}`;
+    title.textContent = titleText(gridSize);
     titleDiv.appendChild(title);
 
     const elementsDiv = document.createElement("div");
@@ -64,17 +63,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const resetButton = document.createElement("button");
     resetButton.classList.add("resetButton");
-    resetButton.textContent = "Reset Current Grid";
+    resetButton.textContent = resetGridText(gridSize);
     resetDiv.appendChild(resetButton);
+
+    const textDiv = document.createElement("div");
+    textDiv.classList.add("textDiv");
+    elementsDiv.appendChild(textDiv);
 
     const rulesDiv = document.createElement("div");
     rulesDiv.classList.add("rulesDiv");
-    elementsDiv.appendChild(rulesDiv);
+    textDiv.appendChild(rulesDiv);
 
     const daRulez = document.createElement("p");
     daRulez.classList.add("daRulez");
-    daRulez.textContent = "When you move the mouse over the squares, they get colored in. You can reset the current grid or create a new grid with your desired size; max size is 100x100. You can turn a square back to white by holding alt and hovering over the square with your mouse. Holding shift will prevent you from coloring so you can get to specific squares."
+    daRulez.textContent = "You can reset the current grid or create a new grid with your desired size; max size is 100x100.";
     rulesDiv.appendChild(daRulez);
+
+    const controlsDiv = document.createElement("div");
+    controlsDiv.classList.add("controlsDiv");
+    textDiv.appendChild(controlsDiv);
+
+    const controlsTitle = document.createElement("p");
+    controlsTitle.classList.add("controlsTitle")
+    controlsTitle.textContent = "--CONTROLS--";
+    controlsDiv.appendChild(controlsTitle);
+
+    const daControls = document.createElement("p");
+    daControls.classList.add("daControls");
+    daControls.textContent = "Holding shift allows you to move the mouse without coloring in squares.\n\n Holding alt and going over a square will turn it back to white.";
+    controlsDiv.appendChild(daControls);
     
     
 
@@ -83,48 +100,84 @@ document.addEventListener('DOMContentLoaded', function() {
     gridDiv.classList.add("grid");
     containerDiv.appendChild(gridDiv);
 
-    for(let i = 0; i < gridSize*gridSize; i++){
-        const square = document.createElement("div");
-        square.classList.add("square");
-        gridDiv.appendChild(square);
-        squareSize = (800/gridSize) -2;
-        square.style.height = `${squareSize}px`;
-        square.style.width = `${squareSize}px`;
-    }
+    return {
+        titleDiv, title, elementsDiv, colorDiv, palette, paletteText,
+        sizeDiv, rangeSlider, rangeValue, rangeButton, resetDiv, resetButton,
+        rulesDiv, daRulez, gridDiv, textDiv, controlsDiv, controlsTitle, daControls
+    };
 
+
+}
+    
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("hi")
+    elements = createElements();
+    newGrid(gridSize)
     slider();
 });
 
-function slider(){
-const rSlider = document.querySelector(".rangeSlider");
-const rValue = document.querySelector(".rangeValue");
-const newButton = document.querySelector(".rangeButton");
-const resButton = document.querySelector(".resetButton");
-let rangeNum = 16;
-    rValue.textContent = `Grid Size: ${gridSize}x${gridSize}`;
 
-    rSlider.addEventListener("input", (event) => {
+
+function slider(){
+let rangeNum = 0;
+    elements.rangeValue.textContent = grideSizeText(gridSize);
+
+    elements.rangeSlider.addEventListener("input", (event) => {
      rangeNum = event.target.value;
-     rValue.textContent = `Grid Size: ${rangeNum}x${rangeNum}`;
+     elements.rangeValue.textContent = grideSizeText(rangeNum);
     });
 
-    newButton.addEventListener("click", () =>{
+    elements.rangeButton.addEventListener("click", () =>{
         gridSize = rangeNum;
         newGrid(gridSize);
     });
 
-    resButton.addEventListener("click", () =>{
-        rSlider.value = gridSize;
-        rValue.textContent = `Grid Size: ${gridSize}x${gridSize}`
-        resetGrid(gridSize);
+    elements.resetButton.addEventListener("click", () =>{
+        elements.rangeSlider.value = gridSize;
+        elements.rangeValue.textContent = grideSizeText(gridSize);
+        resetGrid();
     }) 
 }
 
 
 function newGrid(size){
-    
+
+    if(elements.gridDiv.hasChildNodes()){
+        let child = elements.gridDiv.lastElementChild;
+        while (child) {
+            elements.gridDiv.removeChild(child);
+            child = elements.gridDiv.lastElementChild;
+        }
+    }
+
+    for(let i = 0; i < size*size; i++){
+        const square = document.createElement("div");
+        square.classList.add("square");
+        elements.gridDiv.appendChild(square);
+        squareSize = (800/size) -2;
+        square.style.height = `${squareSize}px`;
+        square.style.width = `${squareSize}px`;
+    }
+
+    elements.title.textContent = titleText(size);
+    elements.resetButton.textContent = resetGridText(size);
 }
 
-function resetGrid(size){
+function resetGrid(){
+    console.log(elements.gridDiv.children.length)
+    for(const child of elements.gridDiv.children){
+        child.style.backgroundColor = "white";
+    }
+}
 
+function grideSizeText(size){
+    return `New Grid Size: ${size}x${size}`;
+}
+
+function titleText(size){
+    return `Etch-a-Sketch ${size}x${size}`;
+}
+
+function resetGridText(size){
+    return `Reset Current Grid\n${size}x${size}`;
 }

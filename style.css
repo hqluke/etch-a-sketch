@@ -2,6 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 300px;
+    height: auto;
+    margin-left: 666px;
 }
 
 
@@ -16,7 +19,7 @@
 .square{
     display:flex;
     border: .1px rgb(0, 0, 0) solid;
-    
+    background-color: white;
    
 }
 
@@ -39,6 +42,7 @@
     border-radius: 5px;
     justify-content: flex-start;
     align-items: center;
+    background-color: rgb(231, 255, 231);
 }
 
 .colorDiv{
@@ -51,7 +55,9 @@
 .sizeDiv{
     display:flex;
     flex-direction: column;
-    
+    width: 200px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .resetDiv{
@@ -60,26 +66,52 @@
 
 }
 
+.textDiv{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+}
+
 .rulesDiv{
     display:flex;
     justify-content: center;
     text-align: center;
 }
 
-
-.sizeDiv p{
+.controlsDiv{
     display:flex;
+    flex-direction: column;
+    margin-top: -8px;
+}
+.controlsTitle{
+    display:flex;
+    font-size: 22px;
+    font-weight: bolder;
+    margin-top: 2px;
+}
+.daControls{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2px;
+    white-space: pre-line;
+}
+
+.textDiv p{
     align-items: center;
     justify-content: center;
 }
 
+
 button{
-    height: 30px;
+    height: 60px;
+    width: 160px;
 }
 
 body{
     display: flex;
     flex-direction: column;
+    background-color: rgb(255,231,255);
 }
 
 .palette{
@@ -87,4 +119,12 @@ body{
     height: 202px;
     margin-top: -20px;
 }
+
+.resetButton{
+    white-space: pre-line;
+}
+
+
+
+
 
