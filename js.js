@@ -3,6 +3,7 @@ const containerDiv = document.querySelector(".container");
 let currentColor = document.querySelector(".palette") //acess it with  currentColor.value
 let gridSize = "16";
 let newGridSize = "";
+let squareSize = 0;
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     rangeSlider.min = 4;
     rangeSlider.max = 100;
     rangeSlider.step = 4;
-    rangeSlider.value = 16;
+    rangeSlider.value = gridSize;
     sizeDiv.appendChild(rangeSlider);
 
     const rangeValue = document.createElement("p");
@@ -82,10 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
     gridDiv.classList.add("grid");
     containerDiv.appendChild(gridDiv);
 
-    for(let i = 0; i < 16; i++){
-        const box = document.createElement("div");
-        box.classList.add("square");
-        gridDiv.appendChild(box);
+    for(let i = 0; i < gridSize*gridSize; i++){
+        const square = document.createElement("div");
+        square.classList.add("square");
+        gridDiv.appendChild(square);
+        squareSize = (800/gridSize) -2;
+        square.style.height = `${squareSize}px`;
+        square.style.width = `${squareSize}px`;
     }
 
     slider();
@@ -118,7 +122,7 @@ let rangeNum = 16;
 
 
 function newGrid(size){
-
+    
 }
 
 function resetGrid(size){

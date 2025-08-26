@@ -1,0 +1,90 @@
+.titleDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 800px;
+    
+}
+
+.square{
+    display:flex;
+    border: .1px rgb(0, 0, 0) solid;
+    
+   
+}
+
+.container{
+    display:flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    min-height: 800px;
+}
+
+.elements{
+    display:flex;
+    flex-direction: column;
+    width: 200px;
+    height: 99.5%;
+    margin-left: 10px;
+    border: 4px black groove;
+    border-radius: 5px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.colorDiv{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.sizeDiv{
+    display:flex;
+    flex-direction: column;
+    
+}
+
+.resetDiv{
+    display:flex;
+    flex-direction: column;
+
+}
+
+.rulesDiv{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.sizeDiv p{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button{
+    height: 30px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.palette{
+    width:202px;
+    height: 202px;
+    margin-top: -20px;
+}
+
